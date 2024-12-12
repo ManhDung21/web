@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Market</title>
+    <style>
+      .title {
+  font-family: 'Brush Script MT', cursive; /* Font chữ kiểu chữ ký */
+  font-size: 42px; /* Kích thước chữ */
+  font-weight: bold;  /* In đậm */
+  color: #000; /* Màu chữ */
+}
+    </style>
+    
+</head>
+<body>
+    <h1 class="title">MD Market</h1>
+</body>
+</html>
+
+<style>
+  
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #ffffff74;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 2.0rem;
+  font-weight: bold;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.about {
+  display: flex; /* Sử dụng Flexbox để đặt ảnh và văn bản cạnh nhau */
+  align-items: center; /* Căn giữa theo trục dọc */
+  gap: 20px; /* Khoảng cách giữa ảnh và nội dung */
+  margin: 20px auto;
+  max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+}
+
+.about img {
+  flex: 1; /* Chiếm 1 phần không gian */
+  max-width: 50%; /* Giới hạn chiều rộng tối đa của ảnh */
+  height: auto;
+  border-radius: 8px;
+}
+
+.about-text {
+  flex: 1; /* Chiếm 1 phần không gian */
+  text-align: left;
+}
+
+
+.hero {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.hero img {
+  width: 100%; /* Chiều rộng tối đa của hình ảnh sẽ là chiều rộng container */
+  max-width: 1100px; /* Giới hạn chiều rộng tối đa */
+  height: 350px; /* Chiều cao cố định là 100px */
+  object-fit: cover; /* Cắt ảnh nếu cần để vừa khít vùng container */
+}
+
+.hero .title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.products {
+  display: flex; /* Sử dụng Flexbox */
+  flex-wrap: wrap; /* Xuống dòng nếu không đủ chỗ */
+  gap: 20px; /* Khoảng cách giữa các sản phẩm */
+  justify-content: center; /* Căn giữa các sản phẩm */
+}
+
+.product {
+  width: 200px; /* Kích thước cố định cho từng sản phẩm */
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product img {
+  width: 100%; /* Đảm bảo ảnh chiếm hết chiều rộng */
+  height: auto;
+  border-radius: 8px;
+}
+
+.product:hover {
+  transform: scale(1.05); /* Phóng to nhẹ khi hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Tăng hiệu ứng đổ bóng */
+}
+
+button.add-to-cart {
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.add-to-cart:hover {
+  background-color: #0056b3;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  width: 100%;
+  max-width: 1350px;
+}
+
+.footer form {
+  margin-bottom: 20px;
+}
+
+.footer input {
+  padding: 10px;
+  width: 60%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.footer button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* Tạo hiệu ứng tim đập */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.05); /* Phóng to nhẹ */
+  }
+  60% {
+    transform: scale(1);
+  }
+}
+
+.pulse {
+  max-width: 50%;
+  height: auto;
+  border-radius: 8px;
+  animation: heartbeat 1.5s ease-in-out infinite; /* Tim đập liên tục */
+  transition: transform 0.3s ease; /* Thêm hiệu ứng mượt */
+}
+
+.pulse:hover {
+  transform: scale(1.1); /* Phóng to khi di chuột vào */
+  animation: none; /* Dừng hiệu ứng tim đập khi di chuột */
+}
+
+
+.footer button:hover {
+  background-color: #0056b3;
+}
+nav button {
+  background-color:   transparent;
+  border: none;
+  color: #000000;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+nav button:hover {
+  text-decoration: underline;
+}
+
+
+</style>
+  </head>
+<body>
+
+  <header>
+    <div class="logo">MD Market</div>
+    <nav>
+      <button onclick="location.href='shop.html'">Shop</button>
+      <button onclick="location.href='voucher.html'">Voucher</button>
+      <button onclick="location.href='shoppingcart.html'">Giỏi hàng</button>
+      <button onclick="location.href='about-us.html'">Về chúng tôi</button>
+    </nav>
+  </header>
+  
+
+<section>
+  <div class="section-title">Về MD Market</div>
+  <div class="about">
+    <img class="pulse" src="" alt="About Image 1">
+    <div class="about-text">
+      <h3>Cuộc sống bền vững dễ dàng hơn</h3>
+      <p>MD Market là nơi cung cấp những sản phẩm thân thiện với môi trường, giúp bạn sống bền vững và dễ dàng hơn. Chúng tôi tự hào mang đến những sản phẩm chất lượng cao, thiết kế đẹp mắt và giá cả hợp lý.</p>
+    </div>
+  </div>
+</section>
+
+
+<div class="hero">
+  <img class="pulse" src="" alt="About Image 1">
+  <div class="title">MD Market</div>
+</div>
+
+
+<section>
+  <div class="section-title">Best Sellers</div>
+  <div class="products">
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+
+<div class="product">
+  <img src="" alt="Product">
+  <p>Ống hút thép không gỉ</p>
+  <p>$9.99</p>
+  <button class="add-to-cart" 
+          data-name="Ống hút thép không gỉ" 
+          data-price="9.99"
+          data-image="">
+      Thêm vào giỏ hàng
+  </button>
+</div>
+
+<div class="product">
+  <img src="" alt="Product">
+  <p>Ống hút thép không gỉ</p>
+  <p>$9.99</p>
+  <button class="add-to-cart" 
+          data-name="Ống hút thép không gỉ" 
+          data-price="9.99"
+          data-image="">
+      Thêm vào giỏ hàng
+  </button>
+</div>
+
+  </div>
+</section>
+<section>
+  <div class="section-title">Best Sellers</div>
+  <div class="products">
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+    
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Best Sellers</div>
+  <div class="products">
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Túi tái sử dụng</p>
+      <p>$15.99</p>
+      <button class="add-to-cart" 
+              data-name="Túi tái sử dụng" 
+              data-price="15.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Bộ dao kéo tre</p>
+      <p>$12.99</p>
+      <button class="add-to-cart" 
+              data-name="Bộ dao kéo tre" 
+              data-price="12.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Cốc sứ sinh thái</p>
+      <p>$8.99</p>
+      <button class="add-to-cart" 
+              data-name="Cốc sứ sinh thái" 
+              data-price="8.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+  </div>
+</section>
+  
+<section>
+  <div class="section-title">Best Sellers</div>
+  <div class="products">
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+    <div class="product">
+      <img src="" alt="Product">
+      <p>Ống hút thép không gỉ</p>
+      <p>$9.99</p>
+      <button class="add-to-cart" 
+              data-name="Ống hút thép không gỉ" 
+              data-price="9.99"
+              data-image="">
+          Thêm vào giỏ hàng
+      </button>
+    </div>
+    
+  </div>
+</section>
+
+<div class="footer">
+  <h3>Đăng ký nhận bản tin của chúng tôi</h3>
+  <form>
+    <input type="email" placeholder="Nhập địa chỉ email của bạn">
+    <button type="submit">Xác nhận</button>
+  </form>
+  <p>Kinh nghiệm cao trong thiết kế và phát triển web, tạo ra sản phẩm chất lượng.</p>
+  <button>Contact Us</button>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cartButtons = document.querySelectorAll(".add-to-cart");
+
+    cartButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const product = {
+          name: button.getAttribute("data-name"),
+          price: button.getAttribute("data-price"),
+          image: button.getAttribute("data-image"),
+        };
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(product);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${product.name} đã được thêm vào giỏ hàng!`);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
+    <style>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voucher</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        header .back-button {
+            font-size: 1.2em;
+            color: #333;
+            cursor: pointer;
+        }
+
+        header .cart-icon {
+            display: flex;
+            align-items: center;
+            font-size: 1.2em;
+            color: green;
+            position: relative;
+            cursor: pointer;
+        }
+
+        header .cart-icon span {
+            font-size: 0.8em;
+            background-color: green;
+            color: white;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            position: absolute;
+            top: -5px;
+            right: -10px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .container h2 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .voucher-grid {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .voucher {
+            background-color: white;
+            padding: 15px;
+            width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .voucher .discount {
+            font-size: 3em;
+            font-weight: bold;
+            color: green;
+        }
+
+        .voucher button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 12px 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        .voucher button:hover {
+            background-color: #005f32;
+        }
+
+        .my-vouchers {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .my-vouchers h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .voucher-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 30px 45px;
+            width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .voucher-item.used {
+            background-color: #e0f4e0;
+            color: #666;
+        }
+
+        .voucher-item .discount {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: green;
+        }
+
+        .voucher-item button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .voucher-item button:hover {
+            background-color: #005f32;
+        }
+
+        .voucher-item.used button {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-button">←</a>
+        <h1>Voucher</h1>
+        <a href="shoppingcart.html" class="cart-icon">
+            <i>🛒</i>
+            <span id="cart-count">5</span>
+        </a>
+    </header>
+
+    <div class="container">
+        <h2>Hãy yêu cầu và sử dụng phiếu thưởng của bạn.</h2>
+
+        <div class="my-vouchers">
+            <h3>My Voucher</h3>
+
+            <div class="voucher-item">
+                <div class="discount">Disc 15%</div>
+                <button>Sử dụng</button>
+            </div>
+            <div class="voucher-item">
+                <div class="discount">Disc 25%</div>
+                <button>Sử dụng</button>
+            </div>
+            <div class="voucher-item">
+                <div class="discount">Disc 20%</div>
+                <button>Sử dụng</button>
+            </div>
+            <div class="voucher-item">
+                <div>
+                    <div class="discount">Disc 45%</div>
+                    <small>How to use</small>
+                </div>
+                <button>Sử dụng</button>
+            </div>
+            <div class="voucher-item">
+                <div>
+                    <div class="discount">Disc 45%</div>
+                    <small>How to use</small>
+                </div>
+                <button>Sử dụng</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lấy tất cả các voucher
+        const voucherItems = document.querySelectorAll('.voucher-item');
+
+        voucherItems.forEach(item => {
+            const useButton = item.querySelector('button');
+            
+            useButton.addEventListener('click', () => {
+                // Nếu voucher chưa được sử dụng
+                if (useButton.textContent === 'Sử dụng') {
+                    const discount = item.querySelector('.discount').textContent;
+                    const discountValue = parseInt(discount.replace('Disc ', '').replace('%', ''));
+                    
+                    useButton.textContent = 'Đã thêm';
+                    item.classList.add('used');
+
+                    // Lưu thông tin voucher vào localStorage
+                    localStorage.setItem('voucherDiscount', discountValue);
+
+                    // Khóa tất cả các voucher khác
+                    disableOtherVouchers(item);
+
+                    // Sau khi voucher được sử dụng, khóa các voucher khác
+                    const allVoucherButtons = document.querySelectorAll('.voucher-item button');
+                    allVoucherButtons.forEach(voucherButton => {
+                        voucherButton.disabled = true;
+                    });
+                } else if (useButton.textContent === 'Đã thêm') {
+                    useButton.textContent = 'Sử dụng';
+                    item.classList.remove('used');
+
+                    // Xóa thông tin voucher khỏi localStorage
+                    localStorage.removeItem('voucherDiscount');
+
+                    // Mở lại tất cả các voucher khác khi voucher bị tắt
+                    enableAllVouchers();
+
+                    // Mở lại tất cả các voucher
+                    const allVoucherButtons = document.querySelectorAll('.voucher-item button');
+                    allVoucherButtons.forEach(voucherButton => {
+                        voucherButton.disabled = false;
+                    });
+                }
+            });
+        });
+
+        // Hàm vô hiệu hóa các voucher khác
+        function disableOtherVouchers(selectedItem) {
+            const allVoucherItems = document.querySelectorAll('.voucher-item');
+            allVoucherItems.forEach(item => {
+                if (item !== selectedItem) {
+                    const button = item.querySelector('button');
+                    button.disabled = true;
+                }
+            });
+        }
+
+        // Hàm mở lại các voucher
+        function enableAllVouchers() {
+            const allVoucherItems = document.querySelectorAll('.voucher-item');
+            allVoucherItems.forEach(item => {
+                const button = item.querySelector('button');
+                button.disabled = false;
+            });
+        }
+
+        // Cập nhật số lượng khi tải trang
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+        });
+
+        // Cập nhật số lượng giỏ hàng
+        function updateCartCount() {
+            const cartCountElement = document.getElementById('cart-count');
+            const cartCount = localStorage.getItem('cartCount') || 0;
+            cartCountElement.textContent = cartCount;
+        }
+    </script>
+
+</body>
+</html>
